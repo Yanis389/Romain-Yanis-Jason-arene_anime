@@ -6,7 +6,7 @@ import joblib
 
 @st.cache_resource
 def charger_modele():
-    return joblib.load("model_tree.joblib")
+    return joblib.load("champion.joblib")
 
 
 model = charger_modele()
