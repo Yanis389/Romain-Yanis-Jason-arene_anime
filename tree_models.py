@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 df = pd.read_csv("anime_tv_clean.csv")
@@ -32,3 +33,6 @@ def evaluer(model, nom):
 
 arbre = DecisionTreeRegressor(random_state=42)
 evaluer(arbre, "Decision Tree")
+
+foret = RandomForestRegressor(n_estimators=100, random_state=42)
+evaluer(foret, "Random Forest")
