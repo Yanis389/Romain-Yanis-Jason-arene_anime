@@ -4,6 +4,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import numpy as np
+import joblib
+
+
 
 # ----------------------
 # Chargement des données
@@ -93,3 +96,20 @@ coef = pd.DataFrame({
 }).sort_values(by="coef", key=abs, ascending=False)
 
 print(coef.head(10))
+
+def sauvegarder_modele(modele, scaler, chemin="modele.joblib"):
+    """
+    Sauvegarde le modèle ET le scaler ensemble.
+    """
+    artefact = {
+        "modele": modele,
+        "scaler": scaler
+    }
+
+    joblib.dump(artefact, chemin)
+
+model=LinearRegression()
+
+saved = model.fit(X_train, y_train)
+
+sauvegarder_modele(saved,None,"modele-LinReg.joblib")
