@@ -6,12 +6,12 @@ import joblib
 
 @st.cache_resource
 def charger_modele():
-    return joblib.load("champion.joblib").get("modele")
+    return joblib.load("champion.joblib")
 
 
 model = charger_modele()
-colonnes = list(model.feature_names_in_)
-genres = [c for c in colonnes if c not in ("episodes", "members")]
+colonnes = [str(c) for c in model.feature_names_in_]
+genres = [c for c in colonnes if c not in ("anime_id", "episodes", "members")]
 
 st.title("Prédiction de la note d'un animé")
 st.write("Choisis les caractéristiques d'un animé TV pour estimer sa note moyenne (sur 10).")
@@ -30,6 +30,7 @@ choix_genres = st.multiselect(
     "Genres (3 maximum)",
     genres,
     max_selections=3,
+    format_func=lambda g: g.replace("_", " "),
     key="genres",
 )
 
