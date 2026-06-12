@@ -134,8 +134,8 @@ elif champion_name == "model_3":
     param_grid = {
         "n_estimators": [100, 200, 500],
         "learning_rate": [0.01, 0.05, 0.1],
-        "max_depth": [-1, 3, 5, 7],  # -1 = pas de limite (spécifique LightGBM)
-        "num_leaves": [15, 31, 63],  # hyperparam clé LightGBM
+        "max_depth": [ 3, 5, 7],
+        "num_leaves": [15, 31, 63], 
         "subsample": [0.8, 1.0],
         "colsample_bytree": [0.8, 1.0],
         "min_child_samples": [10, 20, 50]
