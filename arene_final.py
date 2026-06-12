@@ -6,7 +6,7 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error
 import joblib
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
-from xgboost import XGBRegressor
+from lightgbm import LGBMRegressor
 
 # =========================
 # 1. METRIQUES
@@ -43,7 +43,7 @@ y = df["rating"]
 artefact = {
     "artefact_1": joblib.load("modele-LinReg.joblib"),
     "artefact_2": joblib.load("model_tree.joblib"),
-    "artefact_3": joblib.load("model_xgboost.joblib"),
+    "artefact_3": joblib.load("modele-LightGBM.joblib"),
 }
 
 models = {
@@ -134,9 +134,11 @@ elif champion_name == "model_3":
     param_grid = {
         "n_estimators": [100, 200, 500],
         "learning_rate": [0.01, 0.05, 0.1],
-        "max_depth": [3, 5, 7],
+        "max_depth": [-1, 3, 5, 7],  # -1 = pas de limite (spécifique LightGBM)
+        "num_leaves": [15, 31, 63],  # hyperparam clé LightGBM
         "subsample": [0.8, 1.0],
-        "colsample_bytree": [0.8, 1.0]
+        "colsample_bytree": [0.8, 1.0],
+        "min_child_samples": [10, 20, 50]
     }
 
 
