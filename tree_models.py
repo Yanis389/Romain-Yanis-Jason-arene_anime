@@ -7,6 +7,9 @@ y = df["rating"]
 
 X = df.drop(columns=["rating", "anime_id"])
 
-print("Nombre d'animés :", X.shape[0])
-print("Nombre de variables :", X.shape[1])
-print("Variables utilisées :", X.columns.tolist())
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+print("Animés pour l'entraînement :", X_train.shape[0])
+print("Animés pour le test :", X_test.shape[0])
